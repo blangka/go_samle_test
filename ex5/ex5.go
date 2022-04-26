@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func main() {
 
@@ -8,6 +12,28 @@ func main() {
 	너비지정("너비지정 : ")
 	소수정지정("소수점지정 : ")
 	입력("입력 : ")
+	표준입력("표준입력 : ")
+}
+
+func 표준입력(name string) {
+	stdin := bufio.NewReader(os.Stdin) // ❷ 표준 입력을 읽는 객체
+
+	var a int
+	var b int
+
+	n, err := fmt.Scanln(&a, &b)
+	if err != nil { // 에러 발생 시
+		fmt.Println(name, err) // 에러 출력
+		stdin.ReadString('\n') // ❸ 표준 입력 스트림 지우기
+	} else {
+		fmt.Println(name, n, a, b)
+	}
+	n, err = fmt.Scanln(&a, &b) // ❹ 다시 입력받기
+	if err != nil {
+		fmt.Println(name, err)
+	} else {
+		fmt.Println(name, n, a, b)
+	}
 }
 
 func 입력(name string) {
