@@ -1,0 +1,1 @@
+# go_samle_test
